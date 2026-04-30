@@ -167,6 +167,7 @@
             btnSaveFile.TabIndex = 10;
             btnSaveFile.Text = "저장";
             btnSaveFile.UseVisualStyleBackColor = false;
+            btnSaveFile.Click += btnSaveFile_Click;
             // 
             // picCanvas
             // 

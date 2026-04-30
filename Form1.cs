@@ -112,7 +112,7 @@ namespace SimplePaint
         {
             // 두 점을 기준으로 사각형 영역 계산
             return new Rectangle(
-                Math.Min(p1.X, p2.X), 
+                Math.Min(p1.X, p2.X),
                 Math.Min(p1.Y, p2.Y),
                 Math.Abs(p1.X - p2.X),
                 Math.Abs(p1.Y - p2.Y)
@@ -160,6 +160,35 @@ namespace SimplePaint
         private void trbLineWidth_ValueChanged(object sender, EventArgs e)
         {
             currentLineWidth = trbLineWidth.Value;
+        }
+
+        private void btnSaveFile_Click(object sender, EventArgs e)
+        {
+            // 저장할 그림 있는지 체크
+            if (canvasBitmap == null)
+            {
+                MessageBox.Show("저장할 그림이 없습니다.");
+                return;
+            }
+
+            SaveFileDialog sfd = new SaveFileDialog();
+            sfd.Filter = "PNG 파일 (*.png)|*.png|JPG 파일 (*.jpg)|*.jpg|BMP 파일 (*.bmp)|*.bmp";
+
+            if (sfd.ShowDialog() == DialogResult.OK)
+            {
+                switch (sfd.FilterIndex)
+                {
+                    case 1:
+                        canvasBitmap.Save(sfd.FileName, ImageFormat.Png);
+                        break;
+                    case 2:
+                        canvasBitmap.Save(sfd.FileName, ImageFormat.Jpeg);
+                        break;
+                    case 3:
+                        canvasBitmap.Save(sfd.FileName, ImageFormat.Bmp);
+                        break;
+                }
+            }
         }
     }
 }
